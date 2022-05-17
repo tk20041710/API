@@ -29,18 +29,7 @@ namespace BandAPI.Controllers
          throw new ArgumentNullException(nameof(mapper));
         }
 
-        /// <summary>
-        /// Lấy thông tin tất cả Band
-        /// </summary>
-        /// <param name="bandsResourceParameters"></param>
-        /// <returns></returns>
-        [HttpGet]
-         
-        public ActionResult<IEnumerable<BandDto>> GetBands([FromQuery]  Models.BandsResourceParameters bandsResourceParameters, [FromQuery] Page page)
-        {
-            var bandFromRepo = _bandRepository.GetBands(bandsResourceParameters,page);
-            return Ok(_mapper.Map<IEnumerable<BandDto>>(bandFromRepo));
-        }
+     
 
         /// <summary>
         /// Lấy thông tin của band theo bandId
