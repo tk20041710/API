@@ -18,6 +18,7 @@ namespace BandAPI.Services
         
         bool BandExists(Guid Id);
         bool Save();
+       
     }
     
 }
