@@ -1,0 +1,10 @@
+C:\Users\khanh\Videos\Captures\Gereat\BandAPI\DomainModel\bin\Debug\netcoreapp3.1\DomainModel.deps.json
+C:\Users\khanh\Videos\Captures\Gereat\BandAPI\DomainModel\bin\Debug\netcoreapp3.1\DomainModel.dll
+C:\Users\khanh\Videos\Captures\Gereat\BandAPI\DomainModel\bin\Debug\netcoreapp3.1\DomainModel.pdb
+C:\Users\khanh\Videos\Captures\Gereat\BandAPI\DomainModel\obj\Debug\netcoreapp3.1\DomainModel.csproj.AssemblyReference.cache
+C:\Users\khanh\Videos\Captures\Gereat\BandAPI\DomainModel\obj\Debug\netcoreapp3.1\DomainModel.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\khanh\Videos\Captures\Gereat\BandAPI\DomainModel\obj\Debug\netcoreapp3.1\DomainModel.AssemblyInfoInputs.cache
+C:\Users\khanh\Videos\Captures\Gereat\BandAPI\DomainModel\obj\Debug\netcoreapp3.1\DomainModel.AssemblyInfo.cs
+C:\Users\khanh\Videos\Captures\Gereat\BandAPI\DomainModel\obj\Debug\netcoreapp3.1\DomainModel.csproj.CoreCompileInputs.cache
+C:\Users\khanh\Videos\Captures\Gereat\BandAPI\DomainModel\obj\Debug\netcoreapp3.1\DomainModel.dll
+C:\Users\khanh\Videos\Captures\Gereat\BandAPI\DomainModel\obj\Debug\netcoreapp3.1\DomainModel.pdb

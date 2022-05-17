@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "C1ppQ5D1551GGJQEvLwNL/Y9s3nbYH7aq7rNydWMkieLE74YTLp/teSsPtDXsJS/Newt8z8z8d/zvSjIc9vGzg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\khanh\\Videos\\Captures\\Gereat\\BandAPI\\Services\\Services.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\khanh\\.nuget\\packages\\system.linq.dynamic.core\\1.2.18\\system.linq.dynamic.core.1.2.18.nupkg.sha512"
+  ],
+  "logs": []
+}
