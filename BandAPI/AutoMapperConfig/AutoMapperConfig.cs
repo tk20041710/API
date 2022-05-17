@@ -12,13 +12,13 @@ namespace BandAPI.AutoMapperConfig
     {
         public AutoMapperConfig()
         {
-            #region Album
+            #region Album Mapper
             CreateMap<DomainModel.Album, Models.AlbumDto>().ReverseMap();
             CreateMap<AlbumForCreatingDto, DomainModel.Album>().ReverseMap();
             #endregion
 
 
-            #region Band
+            #region Band Mapper
             CreateMap<DomainModel.Band, Models.BandDto>()
                 .ForMember(
                     dest => dest.FoundedYearsAgo,
