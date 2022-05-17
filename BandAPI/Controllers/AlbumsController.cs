@@ -45,19 +45,7 @@ namespace BandAPI.Controllers
             var albumFromRepo = _albumRepository.GetAlbums(bandId,page);
             return Ok(_mapper.Map<IEnumerable<AlbumDto>>(albumFromRepo));
         }
-        [HttpGet("{Id}", Name = "GetAlbumForBand")]
-        [ResponseCache(Duration = 120)]
-        public ActionResult<AlbumDto> GetAlbumForBand(Guid bandId, Guid Id)
-        {
-            if (!_bandRepository.BandExists(bandId))
-                return NotFound();
 
-            var albumFromRepo = _albumRepository.GetAlbum(bandId, Id);
-            if (albumFromRepo == null)
-                return NotFound();
-
-            return Ok(_mapper.Map<AlbumDto>(albumFromRepo));
-        }
         /// <summary>
         /// Thêm album
         /// </summary>
