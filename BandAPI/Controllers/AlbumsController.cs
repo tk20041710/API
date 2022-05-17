@@ -38,7 +38,13 @@ namespace BandAPI.Controllers
         /// </summary>
         /// <param name="bandId"></param>
         /// <returns></returns>
-      
+        [HttpGet]
+        public ActionResult<IEnumerable<AlbumDto>> GetAlbumsForBand(Guid bandId,Page page)
+        {
+            if (!_bandRepository.BandExists(bandId)) return NotFound();
+            var albumFromRepo = _albumRepository.GetAlbums(bandId,page);
+            return Ok(_mapper.Map<IEnumerable<AlbumDto>>(albumFromRepo));
+        }
 
         /// <summary>
         /// Lấy thông tin của 1 album
