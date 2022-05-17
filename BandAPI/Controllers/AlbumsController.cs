@@ -47,21 +47,6 @@ namespace BandAPI.Controllers
         }
 
         /// <summary>
-        /// Lấy thông tin của 1 album
-        /// </summary>
-        /// <param name="bandId"></param>
-        /// <param name="Id"></param>
-        /// <returns></returns>
-        [HttpGet("{Id}", Name = "GetAlbum")]
-        public ActionResult<AlbumDto> GetAlbumForBand(Guid bandId, Guid Id)
-        {
-            if (!_bandRepository.BandExists(bandId)) return NotFound();
-            var albumFromRepo = _albumRepository.GetAlbum(bandId, Id);
-            if (albumFromRepo == null) return NotFound();
-            return Ok(_mapper.Map<AlbumDto>(albumFromRepo));
-        }
-
-        /// <summary>
         /// Thêm album
         /// </summary>
         /// <param name="bandId"></param>
