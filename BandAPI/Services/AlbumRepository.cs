@@ -50,14 +50,14 @@ namespace BandAPI.Services
                 throw new ArgumentNullException(nameof(Id));
             return _context.Albums.Where(a => a.BandId == bandId && a.Id == Id).FirstOrDefault();
         }
-        public PagedList<Album> GetAlbums(Guid bandId,Page page)
+        public PagedList<Album> GetAlbums(Guid bandId,Paged paged)
         {
             if (bandId == Guid.Empty)
                 throw new ArgumentNullException(nameof(bandId));
 
             var a = _context.Albums.Where(a => a.BandId == bandId)
                                   .OrderBy(a => a.Title) as IQueryable<Album>;
-            return PagedList<Album>.Create(a, page.PageNumber, page.PageSize);
+            return PagedList<Album>.Create(a, paged.Page, paged.Size);
         }
         public bool Save()
         {

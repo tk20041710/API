@@ -15,31 +15,36 @@ namespace BandAPI.Controllers
     public class BandsController : ControllerBase
     {
         private readonly IBandRepository _bandRepository;
-        private readonly IAlbumRepository _albumRepository;
+
         private readonly IMapper _mapper;
+        private readonly IPropertyValidationService _propertyValidationService;
 
-
-        public BandsController(IAlbumRepository albumRepository, IBandRepository bandRepository, IMapper mapper)
+        public BandsController(IBandRepository bandRepository, IMapper mapper,IPropertyValidationService propertyValidationService)
         {
-            _albumRepository = albumRepository ??
-        throw new ArgumentNullException(nameof(albumRepository));
+
             _bandRepository = bandRepository ??
           throw new ArgumentNullException(nameof(bandRepository));
             _mapper = mapper ??
          throw new ArgumentNullException(nameof(mapper));
+            _propertyValidationService = propertyValidationService ??
+        throw new ArgumentNullException(nameof(propertyValidationService));
         }
 
         /// <summary>
-        /// Lấy thông tin tất cả Band
+        /// 
         /// </summary>
         /// <param name="bandsResourceParameters"></param>
+        /// <param name="page"></param>
         /// <returns></returns>
-        [HttpGet]
+        [HttpGet(Name="Getbands")]
 
-        public ActionResult<IEnumerable<BandDto>> GetBands([FromQuery] Models.BandsResourceParameters bandsResourceParameters, [FromQuery] Page page)
+        public IActionResult GetBands([FromQuery] Models.BandsResourceParameters bandsResourceParameters, [FromQuery] Paged paged)
         {
-            var bandFromRepo = _bandRepository.GetBands(bandsResourceParameters, page);
-            return Ok(_mapper.Map<IEnumerable<BandDto>>(bandFromRepo));
+            if (!_propertyValidationService.HasValidProperties<BandDto>(bandsResourceParameters.Fields))
+                return BadRequest("Không tìm thấy");
+
+            var bandFromRepo = _bandRepository.GetBands(bandsResourceParameters, paged);
+            return Ok(_mapper.Map<IEnumerable<BandDto>>(bandFromRepo).ShapeData(bandsResourceParameters.Fields));
         }
 
         /// <summary>
@@ -62,7 +67,7 @@ namespace BandAPI.Controllers
         /// <param name="dto"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult<BandDto> CreatedBand([FromBody] BandForCreatingDto dto)
+        public ActionResult<BandDto> CreatedBand([FromBody] BandForUpdateDto dto)
         {
             var bandEntity = _mapper.Map<DomainModel.Band>(dto);
             _bandRepository.AddBand(bandEntity);
@@ -95,7 +100,7 @@ namespace BandAPI.Controllers
         /// <param name="Id"></param>
         /// <returns></returns>
         [HttpDelete("{Id}")]
-        public ActionResult DeleteBand(Guid Id, [FromQuery] Page page)
+        public ActionResult DeleteBand(Guid Id)
         {
             if (!_bandRepository.BandExists(Id))
                 return NotFound();

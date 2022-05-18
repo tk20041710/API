@@ -11,7 +11,7 @@ namespace BandAPI.Services
 {
    public interface IAlbumRepository
     {
-        PagedList<Album> GetAlbums(Guid bandId,Page page);
+        PagedList<Album> GetAlbums(Guid bandId,Paged paged);
         Album GetAlbum(Guid bandId, Guid Id);
         void AddAlbum(Guid bandId, Album album);
         void DeleteAlbum(Album album);

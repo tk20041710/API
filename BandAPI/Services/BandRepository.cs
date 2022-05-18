@@ -70,11 +70,11 @@ namespace BandAPI.Services
         /// Lấy thông tin của tất cả các band
         /// </summary>
         /// <returns></returns>
-        public PagedList<Band> GetBands(Page page)
+        public PagedList<Band> GetBands(Paged paged)
         {
             var collection = _context.Bands.ToList() as IQueryable<Band>;
 
-            return PagedList<Band>.Create(collection, page.PageNumber, page.PageSize);
+            return PagedList<Band>.Create(collection, paged.Page, paged.Size);
         }
 
         /// <summary>
@@ -82,13 +82,13 @@ namespace BandAPI.Services
         /// </summary>
         /// <param name="Ids"></param>
         /// <returns></returns>
-        public PagedList<Band> GetBands(IEnumerable<Guid> Ids,Page page)
+        public PagedList<Band> GetBands(IEnumerable<Guid> Ids,Paged paged)
         {
             if (Ids == null)
                 throw new ArgumentNullException(nameof(Ids));
              var collection= _context.Bands.Where(a => Ids.Contains(a.Id))
                                   .OrderBy(a => a.Name) as IQueryable<Band>;
-            return PagedList<Band>.Create(collection, page.PageNumber, page.PageSize);
+            return PagedList<Band>.Create(collection, paged.Page, paged.Size);
         }
 
         /// <summary>
@@ -98,7 +98,7 @@ namespace BandAPI.Services
         /// <param name="page"></param>
         /// <param name="size"></param>
         /// <returns></returns>
-        public PagedList<Band> GetBands(Models.BandsResourceParameters bandDto,Page page)
+        public PagedList<Band> GetBands(Models.BandsResourceParameters bandDto,Paged paged)
         {
          
 
@@ -113,12 +113,12 @@ namespace BandAPI.Services
                 collection = collection.Where(b => b.MainGenre.Contains(mainGenre));
             }
 
-            if (!string.IsNullOrWhiteSpace(bandDto.SearchQuery))
+            if (!string.IsNullOrWhiteSpace(bandDto.Filter))
             {
-                var searchQuery = bandDto.SearchQuery.Trim();
-                collection = collection.Where(b => b.Name.Contains(searchQuery));
+                var filter = bandDto.Filter.Trim();
+                collection = collection.Where(b => b.Name.Contains(filter));
             }
-            return PagedList<Band>.Create(collection, page.PageNumber,page.PageSize);
+            return PagedList<Band>.Create(collection, paged.Page,paged.Size);
         }
 
         /// <summary>

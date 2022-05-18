@@ -15,6 +15,7 @@ namespace BandAPI.AutoMapperConfig
             #region Album Mapper
             CreateMap<DomainModel.Album, Models.AlbumDto>().ReverseMap();
             CreateMap<AlbumForCreatingDto, DomainModel.Album>().ReverseMap();
+            CreateMap<AlbumForUpdateDto, DomainModel.Album>().ReverseMap();
             #endregion
 
 
@@ -24,6 +25,7 @@ namespace BandAPI.AutoMapperConfig
                     dest => dest.FoundedYearsAgo,
                     opt => opt.MapFrom(src => $"{src.Founded.ToString("yyyy")} ({src.Founded.GetYearsAgo()}) years ago"));
             CreateMap<Models.BandForCreatingDto, DomainModel.Band>();
+            CreateMap<Models.BandForUpdateDto, DomainModel.Band>();
             #endregion
 
 

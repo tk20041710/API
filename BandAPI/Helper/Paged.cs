@@ -5,11 +5,10 @@ using System.Threading.Tasks;
 
 namespace BandAPI.Helper
 {
-    public class Page
+    public class Paged
     {
-        public int PageNumber { get; set; } = 1;
+        public int Page { get; set; } = 1;
 
-        public int PageSize { get; set; } = 10;
-    
-}
+        public int Size { get; set; } = 10;
+    }
 }

@@ -37,9 +37,10 @@ namespace BandAPI.Controllers
         /// Lấy thuộc tin của tất cả album thuộc bandId
         /// </summary>
         /// <param name="bandId"></param>
+        /// <param name="page"></param>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult<IEnumerable<AlbumDto>> GetAlbumsForBand(Guid bandId,Page page)
+        public ActionResult<IEnumerable<AlbumDto>> GetAlbumsForBand(Guid bandId,Paged page)
         {
             if (!_bandRepository.BandExists(bandId)) return NotFound();
             var albumFromRepo = _albumRepository.GetAlbums(bandId,page);
@@ -77,26 +78,20 @@ namespace BandAPI.Controllers
 
         }
 
+        
         /// <summary>
-        /// Sửa Album theo albumId thuộc bandId
+        /// 
         /// </summary>
         /// <param name="bandId"></param>
         /// <param name="Id"></param>
         /// <param name="dto"></param>
         /// <returns></returns>
         [HttpPut("{Id}")]
-        public ActionResult<AlbumDto> UpdateAlbumForBand (Guid bandId,Guid Id,[FromBody] AlbumForCreatingDto dto)
+        public ActionResult<AlbumDto> UpdateAlbumForBand (Guid bandId,Guid Id,[FromBody] AlbumForUpdateDto dto)
         {
             if (!_bandRepository.BandExists(bandId)) return NotFound();
             var albumFromRepo = _albumRepository.GetAlbum(bandId, Id);
-            if (albumFromRepo == null)
-            {
-                var albumToAdd = _mapper.Map<DomainModel.Album>(dto);
-                albumToAdd.Id = Id;
-                _albumRepository.AddAlbum(bandId, albumToAdd);
-                _albumRepository.Save();
-              return CreatedAtRoute("GetAlbum", new { bandId = albumToAdd.BandId, Id = albumToAdd.Id }, albumToAdd);
-            }    
+            if (albumFromRepo == null)      return NotFound();  
 
             _mapper.Map(dto, albumFromRepo);
             _albumRepository.Save();

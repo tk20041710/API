@@ -32,6 +32,7 @@ namespace BandAPI
             services.AddControllers();
             services.AddScoped<IAlbumRepository, AlbumRepository>();
             services.AddScoped<IBandRepository, BandRepository>();
+            services.AddScoped<IPropertyValidationService, PropertyValidationService>();
             services.AddDbContext<BandAlbumContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString

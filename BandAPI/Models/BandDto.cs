@@ -26,7 +26,9 @@ namespace BandAPI.Models
     public class BandsResourceParameters
     {
         public string MainGenre { get; set; }
-        public string SearchQuery { get; set; }
+        public string Filter { get; set; }
+        public string Fields { get; set; }
+        public string OrderBy { get; set; } = "Name";
     }
 
  
@@ -43,7 +45,22 @@ namespace BandAPI.Models
         [MaxLength(50, ErrorMessage = "MainGenre needs to be up to 200 characters")]
         public string MainGenre { get; set; }
 
-        public ICollection<AlbumForCreatingDto> Albums { get; set; } = new List<AlbumForCreatingDto>();
+
+    }
+
+    public class BandForUpdateDto
+    {
+        [Required(ErrorMessage = "Name needs to be filled in")]
+        [MaxLength(100, ErrorMessage = "Name needs to be up to 100 characters")]
+        public string Name { get; set; }
+
+        [Required]
+        public DateTime Founded { get; set; }
+
+        [Required(ErrorMessage = "MainGenre needs to be filled in")]
+        [MaxLength(50, ErrorMessage = "MainGenre needs to be up to 200 characters")]
+        public string MainGenre { get; set; }
+
     }
 
 }

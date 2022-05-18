@@ -9,24 +9,24 @@ namespace BandAPI.Helpers
     {
         public int CurrentPage { get; set; }
         public int TotalPages { get; set; }
-        public int Size { get; set; }
+        public int PageSize { get; set; }
         public int TotalCount { get; set; }
 
 
-        public PagedList(List<T> items, int totalCount, int currentPage, int size)
+        public PagedList(List<T> items, int totalCount, int currentPage, int pagesize)
         {
             TotalCount = totalCount;
             CurrentPage = currentPage;
-            Size = size;
-            TotalPages = (int)Math.Ceiling(totalCount / (double)size);
+            PageSize = pagesize;
+            TotalPages = (int)Math.Ceiling(totalCount / (double)pagesize);
             AddRange(items);
         }
 
-        public static PagedList<T> Create(IQueryable<T> source, int pageNumber, int pageSize)
+        public static PagedList<T> Create(IQueryable<T> source, int page1, int size1)
         {
             var count = source.Count();
-            var items = source.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
-            return new PagedList<T>(items, count, pageNumber, pageSize);
+            var items = source.Skip((page1 - 1) * size1).Take(size1).ToList();
+            return new PagedList<T>(items, count, page1, size1);
         }
     }
 }

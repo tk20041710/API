@@ -17,7 +17,7 @@ namespace BandAPI.Helper
             var propertyInfoList = new List<PropertyInfo>();
             if(string.IsNullOrWhiteSpace(fields))
             {
-                var propertyInfos = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                var propertyInfos = typeof(T).GetProperties(BindingFlags.IgnoreCase|BindingFlags.Public | BindingFlags.Instance);
 
                 propertyInfoList.AddRange(propertyInfos);
             }
@@ -26,10 +26,10 @@ namespace BandAPI.Helper
                 var fieldsAfterSplit = fields.Split(",");
                 foreach(var f in fieldsAfterSplit)
                 {
-                    var propertyName = fields.Trim();
-                    var propertyInfo= typeof(T).GetProperty(propertyName,BindingFlags.Public | BindingFlags.Instance);
+                    var propertyName = f.Trim();
+                    var propertyInfo= typeof(T).GetProperty(propertyName,BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance);
                     if (propertyInfo == null)
-                        throw new Exception(propertyName.ToString() + "Không tìm thấy");
+                        throw new Exception(propertyName.ToString() + " không tìm thấy");
                     propertyInfoList.Add(propertyInfo);
                 }
             }

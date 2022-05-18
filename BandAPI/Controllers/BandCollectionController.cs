@@ -30,7 +30,7 @@ namespace BandAPI.Controllers
         /// <returns></returns>
         [HttpGet("({ids})", Name = "GetBandCollection")]
         public IActionResult GetBandCollection([FromRoute]
-               [ModelBinder(BinderType = typeof(ArrayModelBinder))]IEnumerable<Guid> ids,[FromQuery] Page page)
+               [ModelBinder(BinderType = typeof(ArrayModelBinder))]IEnumerable<Guid> ids,[FromQuery] Paged page)
         {
             if (ids == null)
                 return BadRequest();
